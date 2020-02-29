@@ -7,7 +7,7 @@
 
 こちらから実験サイト等への案内を致します．
 
-![QRコード](/document/QR.png "このページへのリンクのQRコード")
+![QRコード](https://github.com/akrgt/cis17/blob/master/document/QR.png?raw=true "このページへのリンクのQRコード")
 
 
 
