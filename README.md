@@ -13,19 +13,19 @@
 
 * Ex. 4月25日生まれの方
 
-### [コチラ](URL)
+### [コチラ](http://exp.bee-lab.online/join/vn6dzx85aj/)
 
 のリンクから実験ページへ移動してください．
-
-
 
 ## 【誕生日が偶数日の方】
 
 * Ex. 6月18日生まれの方
 
-### [コチラ](URL)
+### [コチラ](http://exp.bee-lab.online/join/xfp2trtg0n/)
 
 のリンクから実験ページへ移動してください．
+
+※コチラのリンクはセッションの間しか機能しませんので，ご了承ください．
 
 
 
@@ -50,6 +50,16 @@
 * 全ての発表が終わってからご入力ください．
 
 
+
+## 【資料】
+
+* [統計コード](https://github.com/akrgt/cis17/blob/master/document/cis_analysis.Rmd)
+  * Rマークダウンファイルです．
+  * RStudio上で動きます．
+* [今回の実験プログラム](https://github.com/akrgt/cis17/blob/master/document/program.zip)
+  * PythonとoTreeというプログラムが必要です．
+  * インストール等は[コチラ](https://github.com/akrgt/otree_2019KG/blob/master/0_outline/README.md)を御覧ください
+    * [「第25回KG-RCSPセミナー「社会的ジレンマ実験プログラムの開発と実践：oTreeを用いて」](https://github.com/akrgt/otree_2019KG)で使用した資料です．
 
 
 
