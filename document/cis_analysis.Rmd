@@ -11,45 +11,7 @@ library(rstanarm)
 options(mc.cores = parallel::detectCores())
 data <- read_csv("../data/cisdata.csv")
 
-# Nが少ない性別その他を削除
-data <-data %>%
-  filter(q_gender !="other")
-
-
-## Reordering data$q_gender
-data$q_gender <- factor(data$q_gender, levels=c("male", "female"))
-## Reordering data$ARE
-data$ARE <- factor(data$ARE, levels=c("Kanto", "Hokkaido", "Tohoku", "Chubu", "Kinki", "Chugoku", "Shikoku", "Kyushu"))
-## Reordering data$GEN
-data$GEN <- factor(data$GEN, levels=c("20s", "10s", "30s", "40s", "50s", "60s", "70s"))
-## Reordering data$q_MAR
-data$q_MAR <- factor(data$q_MAR, levels=c("NotMarried", "Married"))
-## Reordering data$q_CHI
-data$q_CHI <- factor(data$q_CHI, levels=c("NoChild", "Child"))
-## Reordering data$q_INK
-data$q_INK <- factor(data$q_INK, levels=c("y2-4", "y0", "y1-2", "y4-6", "y6-8", "y8-10", "y10-12", "y12-15", "y15-20", "y20-", "unknown"))
-data$q_INS <- factor(data$q_INS, levels=c("y2-4", "y0", "y1-2", "y4-6", "y6-8", "y8-10", "y10-12", "y12-15", "y15-20", "y20-", "unknown"))
-## Reordering data$q_INK2
-data$q_INK2 <- factor(data$q_INK2, levels=c("y4-6", "y0", "y1-2", "y2-4", "y6-8", "y8-10", "y10-", "unknown"))
-data$q_INS2 <- factor(data$q_INK2, levels=c("y4-6", "y0", "y1-2", "y2-4", "y6-8", "y8-10", "y10-", "unknown"))
-
 ```
-
-## フィルターでデータを落とす
-* 
-```{r}
-table(data$q_tanmatsu)
-```
-
-* タブレットとその他が少ないので，PCとスマホに限定
-```{r}
-## Reordering data$q_tanmatsu
-data$q_tanmatsu <- factor(data$q_tanmatsu, levels=c("PC", "Smartphone", "Tablet", "other"))
-
-data <- data %>%
-  filter(q_tanmatsu=="PC"|q_tanmatsu=="Smartphone")
-```
-
 
 
 # 結果の記述
@@ -59,21 +21,10 @@ data <- data %>%
 
 data %>%
   ggplot(aes(x = as.factor(imc01), fill = as.factor(introjs_dummy))) +
-  geom_bar(position = "fill")+ facet_grid(~incentive_dummy)
+  geom_bar(position = "fill")
 
 
 ```
-
-
-### IMCと端末
-```{r}
-data %>%
-  ggplot(aes(x = as.factor(imc01), fill = as.factor(introjs_dummy))) +
-  geom_bar(position = "fill")+ facet_grid(.~q_tanmatsu)
-```
-* 端末による交互作用はなさそう．
-* 主効果のみの検討でよさそう
-
 
 
 # IMCについて
@@ -93,39 +44,6 @@ anova(IMC_model1)
 ## 応用分析
 * 以下は交互作用なしを前提とする
 
-### crtを追加
-```{r}
-
-IMC_model2 <- glm(imc01 ~ introjs_dummy+crt, data = data, family="binomial")
-summary(IMC_model2)
-
-```
-
-### 端末を追加
-```{r}
-
-IMC_model3 <- glm(imc01 ~ introjs_dummy+crt+q_tanmatsu, data = data, family="binomial")
-summary(IMC_model3)
-
-```
-
-### 性別を追加
-```{r}
-
-IMC_model3 <- glm(imc01 ~ introjs_dummy+crt+q_tanmatsu+q_gender, data = data, family="binomial")
-summary(IMC_model4)
-
-```
-
-
-
-### その他社会経済的要因も
-```{r}
-
-IMC_model3 <- glm(imc01 ~ introjs_dummy+crt+q_tanmatsu+q_gender+GEN+ARE+q_INK2+q_MAR+q_CHI, data = data, family="binomial")
-summary(IMC_model4)
-
-```
 
 
 
@@ -133,7 +51,7 @@ summary(IMC_model4)
 ## 分析結果の出力
 ```{r}
 library(sjPlot)
-tab_model(IMC_model1,IMC_model2,IMC_model3,IMC_model4, show.intercept = TRUE)
+tab_model(IMC_model1, show.intercept = TRUE)
 ```
 
 
